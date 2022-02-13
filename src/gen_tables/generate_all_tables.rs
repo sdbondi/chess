@@ -25,6 +25,12 @@ use crate::gen_tables::bmis::*;
 use crate::gen_tables::magic::*;
 
 pub fn generate_all_tables() {
+    let magic_path = Path::new("generated").join("magic_gen.rs");
+    let zobrist_path = Path::new("generated").join("zobrist_gen.rs");
+    if magic_path.exists() && zobrist_path.exists() {
+        return;
+    }
+
     gen_lines();
     gen_between();
     gen_bishop_rays();
@@ -39,7 +45,6 @@ pub fn generate_all_tables() {
     gen_all_bmis();
 
     let out_dir = env::var("OUT_DIR").unwrap();
-    let magic_path = Path::new(&out_dir).join("magic_gen.rs");
     let mut f = File::create(&magic_path).unwrap();
 
     write_king_moves(&mut f);
@@ -54,7 +59,6 @@ pub fn generate_all_tables() {
     write_bmis(&mut f);
     write_bitboard_data(&mut f);
 
-    let zobrist_path = Path::new(&out_dir).join("zobrist_gen.rs");
     let mut z = File::create(&zobrist_path).unwrap();
 
     write_zobrist(&mut z);

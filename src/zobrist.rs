@@ -9,7 +9,7 @@ use crate::square::{Square, NUM_SQUARES};
 pub struct Zobrist;
 
 // Include the generated lookup tables
-include!(concat!(env!("OUT_DIR"), "/zobrist_gen.rs"));
+include!("../generated/zobrist_gen.rs");
 
 impl Zobrist {
     /// Get the value for a particular piece

@@ -7,7 +7,7 @@ use crate::square::Square;
 use std::arch::x86_64::{_pdep_u64, _pext_u64};
 
 // Include the generated lookup tables
-include!(concat!(env!("OUT_DIR"), "/magic_gen.rs"));
+include!("../generated/magic_gen.rs");
 
 /// Get the rays for a bishop on a particular square.
 #[inline]
